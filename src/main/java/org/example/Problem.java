@@ -44,7 +44,7 @@ public class Problem {
         return sb.toString();
     }
 
-    public void Solve(int capacity) {
+    public String Solve(int capacity) {
         List<Item> items = this.getItems();
         items.sort((item1, item2) -> {
             double ratio1 = (double) item1.getValue() / item1.getWeight();
@@ -71,6 +71,6 @@ public class Problem {
 
         System.out.println("Total value: " + value + "\nEmpty space: " + capacity);
 
-
+        return "Total value: " + value + "\nEmpty space: " + capacity;
     }
 }
