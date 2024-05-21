@@ -43,4 +43,34 @@ public class Problem {
         }
         return sb.toString();
     }
+
+    public void Solve(int capacity) {
+        List<Item> items = this.getItems();
+        items.sort((item1, item2) -> {
+            double ratio1 = (double) item1.getValue() / item1.getWeight();
+            double ratio2 = (double) item2.getValue() / item2.getWeight();
+            return Double.compare(ratio2, ratio1);
+        });
+        // items can be used infinitely
+
+        int value = 0;
+
+        while (capacity > 0) {
+            Item item = items.get(0);
+            if (item.getWeight() <= capacity) {
+                capacity -= item.getWeight();
+                value += item.getValue();
+                System.out.println("Added item: " + item + " empty space: " + capacity);
+            } else {
+                items.remove(0);
+                if (items.isEmpty()) {
+                    break;
+                }
+            }
+        }
+
+        System.out.println("Total value: " + value + "\nEmpty space: " + capacity);
+
+
+    }
 }
