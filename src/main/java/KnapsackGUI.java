@@ -3,14 +3,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import org.example.Problem;
-import org.example.Item;
 
 public class KnapsackGUI {
     private JFrame frame;
     private JPanel panel;
     private JTextField numberOfItemsField;
     private JTextField seedField;
-    private JTextField upperBoundField;
     private JTextField capacityField;
     private JButton solveButton;
     private JTextArea resultArea;
