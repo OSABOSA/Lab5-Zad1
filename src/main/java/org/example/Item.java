@@ -24,6 +24,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item " + index +" [weight=" + weight + ", value=" + value + "]";
+        return "No: " + index + " v: " + value + " w: " + weight + "\n";
     }
 }

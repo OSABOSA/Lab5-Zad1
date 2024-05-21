@@ -9,17 +9,19 @@ public class KnapsackGUI {
     private JFrame frame;
     private JPanel panel;
     private JTextField numberOfItemsField;
-    private JTextField lowerBoundField;
+    private JTextField seedField;
     private JTextField upperBoundField;
     private JTextField capacityField;
     private JButton solveButton;
     private JTextArea resultArea;
 
+    private JTextArea resultArea2;
+
     public KnapsackGUI() {
         // Tworzenie głównej ramki
         frame = new JFrame("Knapsack Problem Solver");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(400, 300));
+        frame.setPreferredSize(new Dimension(600, 400));
 
         // Tworzenie panelu głównego z GridBagLayout
         panel = new JPanel(new GridBagLayout());
@@ -41,19 +43,11 @@ public class KnapsackGUI {
 
         c.gridx = 0;
         c.gridy = 1;
-        panel.add(new JLabel("Lower Bound:"), c);
+        panel.add(new JLabel("Seed:"), c);
 
         c.gridx = 1;
-        lowerBoundField = new JTextField(10);
-        panel.add(lowerBoundField, c);
-
-        c.gridx = 0;
-        c.gridy = 2;
-        panel.add(new JLabel("Upper Bound:"), c);
-
-        c.gridx = 1;
-        upperBoundField = new JTextField(10);
-        panel.add(upperBoundField, c);
+        seedField = new JTextField(10);
+        panel.add(seedField, c);
 
         c.gridx = 0;
         c.gridy = 3;
@@ -67,6 +61,8 @@ public class KnapsackGUI {
         c.gridy = 4;
         c.gridwidth = 2;
         solveButton = new JButton("Solve");
+        frame.getRootPane().setDefaultButton(solveButton);
+        solveButton.setFocusable(false);
         panel.add(solveButton, c);
 
         c.gridx = 0;
@@ -77,8 +73,22 @@ public class KnapsackGUI {
         c.weighty = 1.0;
         resultArea = new JTextArea();
         resultArea.setEditable(false);
+        resultArea.setFocusable(false);
         JScrollPane scrollPane = new JScrollPane(resultArea);
         panel.add(scrollPane, c);
+
+
+        c.gridx = 2;
+        c.gridy = 0;
+        c.gridheight = 6;
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        resultArea2 = new JTextArea();
+        resultArea2.setEditable(false);
+        resultArea2.setFocusable(false);
+        JScrollPane scrollPane2 = new JScrollPane(resultArea2);
+        panel.add(scrollPane2, c);
 
         // Dodawanie ActionListener do przycisku
         solveButton.addActionListener(new ActionListener() {
@@ -95,22 +105,13 @@ public class KnapsackGUI {
 
     private void solveKnapsackProblem() {
         int numberOfItems = Integer.parseInt(numberOfItemsField.getText());
-        int lowerBound = Integer.parseInt(lowerBoundField.getText());
-        int upperBound = Integer.parseInt(upperBoundField.getText());
         int capacity = Integer.parseInt(capacityField.getText());
+        int seed = Integer.parseInt(seedField.getText());
 
-        Problem problem = new Problem(numberOfItems, System.currentTimeMillis(), lowerBound, upperBound);
+        Problem problem = new Problem(numberOfItems, seed, 1, 10);
         var out = problem.Solve(capacity);
         resultArea.setText(out);
-
-//        StringBuilder resultBuilder = new StringBuilder();
-//        for (Item item : problem.getItems()) {
-//            resultBuilder.append(item).append("\n");
-//        }
-////        resultBuilder.append("Total value: ").append(problem.getTotalValue()).append("\n");
-////        resultBuilder.append("Remaining capacity: ").append(problem.getRemainingCapacity()).append("\n");
-//
-//        resultArea.setText(resultBuilder.toString());
+        resultArea2.setText(problem.toString());
     }
 
     public static void main(String[] args) {
