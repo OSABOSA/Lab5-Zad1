@@ -45,8 +45,19 @@ public class ProblemTest {
 
     @Test
     public void isSolveCorrect() {
-        Problem problem = new Problem(2, 2, 1, 10);
-        var ret = problem.Solve(23);
-        assertEquals(ret, "Total value: 30\nEmpty space: 0");
+        Problem problem = new Problem(4, 34, 1, 10);
+        var ret = problem.Solve(44);
+        var out = """
+                No: 0 v: 6 w: 5
+                No: 0 v: 6 w: 5
+                No: 0 v: 6 w: 5
+                No: 0 v: 6 w: 5
+                No: 0 v: 6 w: 5
+                No: 0 v: 6 w: 5
+                No: 0 v: 6 w: 5
+                No: 0 v: 6 w: 5
+                No: 2 v: 3 w: 3
+                """;
+        assertEquals(ret, out);
     }
 }
