@@ -29,7 +29,7 @@ public class Main {
             System.out.println(problem);
 
             // Rozwiązujemy problem algorytmem zachłannym
-            problem.Solve(capacity);
+            System.out.println(problem.Solve(capacity));
         }
 
     }
